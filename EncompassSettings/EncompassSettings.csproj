@@ -240,6 +240,7 @@
     <Compile Include="EncompassSessionManager.cs" />
     <Compile Include="EncompassSettingsManager\CustomFields.cs" />
     <Compile Include="EncompassSettingsManager\Documents.cs" />
+    <Compile Include="EncompassSettingsManager\Fees.cs" />
     <Compile Include="EncompassSettingsManager\Personas.cs" />
     <Compile Include="EncompassSettingsManager\PipelineViews.cs" />
     <Compile Include="EncompassSettingsManager\Secondary.cs" />
