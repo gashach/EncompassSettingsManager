@@ -22,5 +22,12 @@ namespace EncompassSettings.EncompassSettingsManager
                 
             }
         }
+
+        public static string GetAllPrivateReportsforUserName(this EncompassSessionManager manager, string username)
+        {
+            var reportMainList =
+                manager.EncompassDefaultInstance.ReportManager.GetReportDirEntries(
+                    FileSystemEntry.PrivateRoot(username));
+        }
     }
 }
