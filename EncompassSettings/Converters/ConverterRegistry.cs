@@ -11,7 +11,9 @@ namespace EncompassSettings.Converters
         private static bool _initStatus = false;
         public static Dictionary<string,JsonConverter> CustomConverters { get; private set; } = new Dictionary<string,JsonConverter>();
 
-        public static void Register(JsonSerializerSettings settings)
+        public static JsonSerializerSettings JsonSettings { get; private set; } = new JsonSerializerSettings();
+
+        public static void Register()
         {
             if (_initStatus) return;
 
@@ -23,7 +25,7 @@ namespace EncompassSettings.Converters
             {
                 var newConverter = Activator.CreateInstance(type, null) as JsonConverter;
                 CustomConverters.Add(type.Name,newConverter);
-                settings.Converters.Add(newConverter);
+                JsonSettings.Converters.Add(newConverter);
             }
             _initStatus = true;
         }

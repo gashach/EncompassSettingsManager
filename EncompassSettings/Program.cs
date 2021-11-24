@@ -21,6 +21,7 @@ namespace EncompassSettings
     {
         public static Dictionary<int, string> PersonaMap = new Dictionary<int, string>();
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -32,12 +33,9 @@ namespace EncompassSettings
 
     class BLAH
     {
-        static JsonSerializerSettings settings = new JsonSerializerSettings();
-
-
         public static void RUN()
         {
-            global::EncompassSettings.Converters.ConverterRegistry.Register(settings);
+            global::EncompassSettings.Converters.ConverterRegistry.Register();
 
             //settings.Converters.Add(new BusinessRuleConverter());
 
@@ -66,7 +64,7 @@ namespace EncompassSettings
 
 
 
-        
+
         static void fixnewPROD()
         {
             EllieMae.Encompass.Client.Session session = new EllieMae.Encompass.Client.Session();
@@ -81,14 +79,16 @@ namespace EncompassSettings
             EllieMaeIdpClient emc = new EllieMaeIdpClient();
             var auth = emc.GetAuthCode("serverID", "user", "pass").GetAwaiter().GetResult();
             EllieMae.EMLite.RemotingServices.Session.Start(@"server", "user", "pass", "API-Tools", false, null, auth);
-            var so = session.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Single(pi => pi.Name == "SessionObjects").GetValue(session) as SessionObjects;
+            var so = session.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Single(pi => pi.Name == "SessionObjects").GetValue(session) as SessionObjects;
 
 
 
-            
+
 
             //File.WriteAllText("personaMap.json", JsonConvert.SerializeObject(personaMap));
-            var personaMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("personaMap.json"));
+            var personaMap =
+                JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("personaMap.json"));
 
 
 
@@ -320,7 +320,8 @@ namespace EncompassSettings
                     so.ContactManager.CreateBizPartner(c);
                 }
                 catch
-                { }
+                {
+                }
             }
 
             session.End();
@@ -331,7 +332,8 @@ namespace EncompassSettings
             EllieMae.Encompass.Client.Session session = new EllieMae.Encompass.Client.Session();
             session.Start(@"server", "user", "pass");
             EllieMae.EMLite.RemotingServices.Session.Start(@"server", "user", "pass", "Encompass", false);
-            var so = session.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Single(pi => pi.Name == "SessionObjects").GetValue(session) as SessionObjects;
+            var so = session.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Single(pi => pi.Name == "SessionObjects").GetValue(session) as SessionObjects;
             var s = EllieMae.EMLite.RemotingServices.Session.DefaultInstance;
             //var identity = new EllieMae.EMLite.DataEngine.LoanIdentity("04f0f88c - 95e5 - 4274 - 83e4 - 59624e36b765");
 
@@ -340,29 +342,33 @@ namespace EncompassSettings
             //loan.ForceLock();
             //C:\SmartClientCache\Apps\UAC\Ellie Mae\A#DkGCbu#+nkEVpfk0ToMIgKcr8=\Encompass360
             var dataMgr = (EllieMae.EMLite.DataEngine.LoanDataMgr)
-                    loan.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                loan.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
                     .Single(pi => pi.Name == "dataMgr").GetValue(loan);
             var asm = Assembly.LoadFile(@"C:\Users\Jesse.Weinstock\Downloads\ePASS.Appraisal.PreferredAppraiser.dll");
             //var asm2 = Assembly.LoadFile(@"C:\SmartClientCache\Apps\UAC\Ellie Mae\hwV988goe69Au+JE3YZcq1THDOI=\Encompass360\EMePass.dll");
             var bamType = typeof(EllieMae.EMLite.ePass.Bam);
-            var bam = Activator.CreateInstance(bamType, new object[] { null, dataMgr, dataMgr.LoanData });
+            var bam = Activator.CreateInstance(bamType, new object[] {null, dataMgr, dataMgr.LoanData});
             var OrderHistoryType = asm.GetTypes().First(x => x.Name == "OrderHistory");
             StringBuilder sb = new StringBuilder();
-            foreach (var order in OrderHistoryType.GetProperty("GetHistory").GetValue(Activator.CreateInstance(OrderHistoryType, new object[] { bam, true })) as IEnumerable)
+            foreach (var order in OrderHistoryType.GetProperty("GetHistory")
+                .GetValue(Activator.CreateInstance(OrderHistoryType, new object[] {bam, true})) as IEnumerable)
             {
                 foreach (var his in order.GetType().GetField("History").GetValue(order) as IEnumerable)
                 {
                     var value = his.GetType().GetField("Comments").GetValue(his);
                 }
             }
+
             session.End();
         }
+
         static void fix()
         {
             EllieMae.Encompass.Client.Session session = new EllieMae.Encompass.Client.Session();
             session.Start(@"server", "user", "pass");
             //EllieMae.EMLite.RemotingServices.Session.Start(@"server", "user", "pass", "AdminTools", false);
-            var so = session.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Single(pi => pi.Name == "SessionObjects").GetValue(session) as SessionObjects;
+            var so = session.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Single(pi => pi.Name == "SessionObjects").GetValue(session) as SessionObjects;
             //var s = EllieMae.EMLite.RemotingServices.Session.DefaultInstance;
 
             //var identity = new EllieMae.EMLite.DataEngine.LoanIdentity("04f0f88c - 95e5 - 4274 - 83e4 - 59624e36b765");
@@ -703,6 +709,7 @@ namespace EncompassSettings
             {
                 Global.PersonaMap.Add(p.ID, p.Name);
             }
+
             var typ = BizRuleType.FieldRules;
             var rules = so.BpmManager.GetRules().Cast<BizRuleInfo>().Where(x => !x.Inactive).ToList();
             File.WriteAllText($"rules.json", JsonConvert.SerializeObject(rules, settings));
@@ -710,20 +717,23 @@ namespace EncompassSettings
 
             session.End();
         }
+
         private static IServerProgressFeedback2 feedback;
 
         public static KeyValuePair<string, int> getUserMap(EllieMae.EMLite.RemotingServices.UserInfo user)
         {
-            var id = user.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance).Single(pi => pi.Name == "Id").GetValue(user) as int?;
+            var id = user.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Single(pi => pi.Name == "Id").GetValue(user) as int?;
             return new KeyValuePair<string, int>(user.Userid, id ?? 0);
         }
 
 
-    public class UserGroupExport
-    {
-        public string Name { get; set; }
-        public AclGroupLoanMembers AclGroupLoanMembers { get; set; }
-        public OrgInGroup[] AclOrgGroupMembers { get; set; }
-        public string[] AclUserGroupMembers { get; set; }
+        public class UserGroupExport
+        {
+            public string Name { get; set; }
+            public AclGroupLoanMembers AclGroupLoanMembers { get; set; }
+            public OrgInGroup[] AclOrgGroupMembers { get; set; }
+            public string[] AclUserGroupMembers { get; set; }
+        }
     }
 }
