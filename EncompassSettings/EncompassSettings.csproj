@@ -238,6 +238,7 @@
     <Compile Include="Converters\UserInfoConverter.cs" />
     <Compile Include="Converters\XdbConverter.cs" />
     <Compile Include="EncompassSessionManager.cs" />
+    <Compile Include="EncompassSettingsManager\Contacts.cs" />
     <Compile Include="EncompassSettingsManager\CustomFields.cs" />
     <Compile Include="EncompassSettingsManager\Documents.cs" />
     <Compile Include="EncompassSettingsManager\Fees.cs" />
