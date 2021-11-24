@@ -243,6 +243,7 @@
     <Compile Include="EncompassSettingsManager\Fees.cs" />
     <Compile Include="EncompassSettingsManager\Fields.cs" />
     <Compile Include="EncompassSettingsManager\Forms.cs" />
+    <Compile Include="EncompassSettingsManager\Orgs.cs" />
     <Compile Include="EncompassSettingsManager\Personas.cs" />
     <Compile Include="EncompassSettingsManager\PipelineViews.cs" />
     <Compile Include="EncompassSettingsManager\Reports.cs" />
