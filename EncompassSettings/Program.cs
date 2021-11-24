@@ -728,12 +728,6 @@ namespace EncompassSettings
         }
 
 
-        public class UserGroupExport
-        {
-            public string Name { get; set; }
-            public AclGroupLoanMembers AclGroupLoanMembers { get; set; }
-            public OrgInGroup[] AclOrgGroupMembers { get; set; }
-            public string[] AclUserGroupMembers { get; set; }
-        }
+
     }
 }

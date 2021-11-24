@@ -14,7 +14,13 @@ namespace EncompassSettings.EncompassSettingsManager
             return JsonConvert.SerializeObject(orgs);
         }
 
-        public static void PushOrgs(this EncompassSessionManager manager, string jsonData)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="jsonData"></param>
+        /// <returns>Old OrgID to New OrgID map</returns>
+        public static Dictionary<int, int> PushOrgs(this EncompassSessionManager manager, string jsonData)
         {
             var incomingOrgs =
                 JsonConvert.DeserializeObject<List<OrgInfo>>(jsonData, Converters.ConverterRegistry.JsonSettings);
@@ -64,6 +70,8 @@ namespace EncompassSettings.EncompassSettingsManager
                     OldToNewIDMap.Add(incomingOrg.Oid,existsList.First().Oid);
                 }
             }
+
+            return OldToNewIDMap;
         }
     }
 }

@@ -7,13 +7,12 @@ namespace EncompassSettings.EncompassSettingsManager
 {
     public static class Personas
     {
-        public static string GetAllPersonas(this EncompassSessionManager manager)
+        public static string GetAllPersonasAsJson(this EncompassSessionManager manager)
         {
-            var personas = manager.EncompassSessionObjects.PersonaManager.GetAllPersonas().ToList();
-            return JsonConvert.SerializeObject(personas);
+            return JsonConvert.SerializeObject(manager.GetAllPersonas());
         }
 
-        public static List<Persona> GetAllPersonasList(this EncompassSessionManager manager)
+        public static List<Persona> GetAllPersonas(this EncompassSessionManager manager)
         {
             return manager.EncompassSessionObjects.PersonaManager.GetAllPersonas().ToList();
         }
