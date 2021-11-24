@@ -237,7 +237,9 @@
     <Compile Include="Converters\TaskConverter.cs" />
     <Compile Include="Converters\UserInfoConverter.cs" />
     <Compile Include="Converters\XdbConverter.cs" />
+    <Compile Include="EllieMaeIdpClient.cs" />
     <Compile Include="EncompassSessionManager.cs" />
+    <Compile Include="EncompassSettingsManager\BizRules.cs" />
     <Compile Include="EncompassSettingsManager\Contacts.cs" />
     <Compile Include="EncompassSettingsManager\CustomFields.cs" />
     <Compile Include="EncompassSettingsManager\Documents.cs" />
