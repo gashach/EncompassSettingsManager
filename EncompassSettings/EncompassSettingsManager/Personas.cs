@@ -16,5 +16,12 @@ namespace EncompassSettings.EncompassSettingsManager
         {
             return manager.EncompassSessionObjects.PersonaManager.GetAllPersonas().ToList();
         }
+
+        public static List<EllieMae.Encompass.BusinessObjects.Users.Persona> GetAllPersonasStandard(
+            this EncompassSessionManager manager)
+        {
+            return manager.EncompassSession.Users.Personas.Cast<EllieMae.Encompass.BusinessObjects.Users.Persona>()
+                .ToList();
+        }
     }
 }
