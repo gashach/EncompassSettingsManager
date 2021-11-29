@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Elli.Common.Extensions;
 using EllieMae.EMLite.ClientServer.Contacts;
@@ -10,7 +11,7 @@ namespace EncompassSettings.EncompassSettingsManager
 {
     public static class Contacts
     {
-        public static string GetAllBizContacts(this EncompassSessionManager manager)
+        public static List<BizPartnerInfo> GetAllBizContacts(this EncompassSessionManager manager)
         {
             FieldFilterList filter = new FieldFilterList();
             List<QueryCriterion> qcList = new List<QueryCriterion>();
@@ -24,7 +25,22 @@ namespace EncompassSettings.EncompassSettingsManager
                 manager.EncompassSessionObjects.ContactManager.GetBizPartners(list.Select(x => x.ContactID).ToArray());
             cursor.Dispose();
             cursor = null;
-            return JsonConvert.SerializeObject(dataList);
+            return dataList.ToList();
+        }
+
+        public static void AddBizContacts(this EncompassSessionManager manager, List<BizPartnerInfo> contacts)
+        {
+            foreach (var contact in contacts)
+            {
+                try
+                {
+                    manager.EncompassSessionObjects.ContactManager.CreateBizPartner(contact);
+                }
+                catch {
+                    //yes, we dont care about errors for now.
+                    //TODO: add error handling
+                }
+            }
         }
     }
 }

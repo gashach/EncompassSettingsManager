@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using EllieMae.EMLite.ClientServer;
+using EllieMae.EMLite.DataEngine;
+using EllieMae.Encompass.BusinessObjects.Loans;
 
 namespace EncompassSettings
 {
@@ -16,6 +18,8 @@ namespace EncompassSettings
         public EllieMae.EMLite.RemotingServices.Sessions.Session EncompassDefaultInstance { get; private set; }
         
         public SessionObjects EncompassSessionObjects { get; private set; }
+        
+        
         
         public EncompassSessionManager(string server, string userName, string password)
         {

@@ -57,6 +57,7 @@ namespace EncompassSettings.EncompassSettingsManager
                     createdUser.Personas.Add(currentPersonas.Single(x=>x.Name == oldPersonaName));
                 }
             }
+            createdUser.Commit();
         }
     }
 }

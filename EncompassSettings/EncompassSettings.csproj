@@ -248,6 +248,8 @@
     <Compile Include="EncompassSettingsManager\Folders.cs" />
     <Compile Include="EncompassSettingsManager\Forms.cs" />
     <Compile Include="EncompassSettingsManager\Groups.cs" />
+    <Compile Include="EncompassSettingsManager\Loan.cs" />
+    <Compile Include="EncompassSettingsManager\MilestoneTasks.cs" />
     <Compile Include="EncompassSettingsManager\Orgs.cs" />
     <Compile Include="EncompassSettingsManager\Personas.cs" />
     <Compile Include="EncompassSettingsManager\PipelineViews.cs" />
