@@ -174,20 +174,9 @@ namespace EncompassSettings
 
             //    }
             //}
-
-            //var activateList = so.BpmManager.GetRules(BizRuleType.MilestoneRules).ToList().Where(x=>x.Inactive).ToList();
-            //var activateList = rulelist.Where(x => x.Inactive && x.LastModifiedByUserId == "jweinstock" && x.LastModTime > DateTime.Parse("7/25/2020")).ToList();
-            //foreach (var rule in activateList)
-            //    so.BpmManager.ActivateRule(rule.RuleType, rule.RuleID);
-            //var personaList = so.PersonaManager.GetAllPersonas().ToList();
+            
 
 
-            //PipelineViewAclManager mgr = (PipelineViewAclManager)so.Session.GetAclManager(AclCategory.PersonaPipelineView);
-            //foreach (var persona in personaList)
-            //{
-            //    var viewList = mgr.GetPersonaPipelineViews(persona.ID).ToList();
-            //    //mgr.
-            //}
 
             //List<LoanXDBField> fields = null;
 
