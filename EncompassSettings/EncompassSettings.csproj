@@ -241,7 +241,6 @@
     <Compile Include="EncompassSessionManager.cs" />
     <Compile Include="EncompassSettingsManager\BizRules.cs" />
     <Compile Include="EncompassSettingsManager\Contacts.cs" />
-    <Compile Include="EncompassSettingsManager\CustomFields.cs" />
     <Compile Include="EncompassSettingsManager\Documents.cs" />
     <Compile Include="EncompassSettingsManager\Fees.cs" />
     <Compile Include="EncompassSettingsManager\Fields.cs" />
@@ -256,6 +255,7 @@
     <Compile Include="EncompassSettingsManager\Reports.cs" />
     <Compile Include="EncompassSettingsManager\Roles.cs" />
     <Compile Include="EncompassSettingsManager\Secondary.cs" />
+    <Compile Include="EncompassSettingsManager\Templates.cs" />
     <Compile Include="EncompassSettingsManager\Users.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

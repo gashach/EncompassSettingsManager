@@ -11,7 +11,7 @@ namespace EncompassSettings.EncompassSettingsManager
 {
     public static class Groups
     {
-        public static string GetAllUserGroupsAsJson(this EncompassSessionManager manager)
+        public static List<UserGroupExport> GetAllUserGroupsAsJson(this EncompassSessionManager manager)
         {
             var groupList = manager.EncompassSessionObjects.AclGroupManager.GetAllGroups();
             var userGroups = new List<UserGroupExport>();
@@ -28,13 +28,7 @@ namespace EncompassSettings.EncompassSettingsManager
                 userGroups.Add(uge);
             }
 
-            return JsonConvert.SerializeObject(userGroups);
-        }
-
-        public static List<UserGroupExport> ReadGroupsFromJson(string jsonData)
-        {
-            var data = JsonConvert.DeserializeObject<List<UserGroupExport>>(jsonData);
-            return data;
+            return userGroups;
         }
 
         public static void ImportGroups(this EncompassSessionManager manager,

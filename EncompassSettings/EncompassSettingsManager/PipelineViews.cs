@@ -9,7 +9,7 @@ namespace EncompassSettings.EncompassSettingsManager
 {
     public static class PipelineViews
     {
-        public static string GetPersonalPipelineViews(this EncompassSessionManager manager, List<Persona> personaList)
+        public static List<PersonaPipelineViewList> GetPersonalPipelineViews(this EncompassSessionManager manager, List<Persona> personaList)
         {
             PipelineViewAclManager mgr =
                 manager.EncompassDefaultInstance.ACL.GetAclManager(AclCategory.PersonaPipelineView) as PipelineViewAclManager;
@@ -25,7 +25,31 @@ namespace EncompassSettings.EncompassSettingsManager
                 
             }
 
-            return JsonConvert.SerializeObject(data);
+            return data;
+        }
+
+        public static void AddUpdatePersonaPipelineViews(this EncompassSessionManager manager,
+            List<PersonaPipelineViewList> pipelineViewList)
+        {
+            PipelineViewAclManager mgr =
+                (PipelineViewAclManager) manager.EncompassDefaultInstance.ACL.GetAclManager(AclCategory
+                    .PersonaPipelineView);
+            foreach (var personaPipelineViewList in pipelineViewList)
+            {
+                foreach (var pipelineView in personaPipelineViewList.PipelineViews)
+                {
+                    if (!mgr.GetPersonaPipelineViews(pipelineView.PersonaID).Any(x => x.Name == pipelineView.Name))
+                        mgr.CreatePipelineView(pipelineView);
+                    else
+                    {
+                        var updateView = mgr.GetPersonaPipelineView(pipelineView.PersonaID, pipelineView.Name);
+                        updateView.Columns.Clear();
+                        updateView.Columns.AddRange(pipelineView.Columns.ToArray());
+                        updateView.Filter = pipelineView.Filter;
+                        mgr.UpdatePipelineView(updateView);
+                    }
+                }
+            }
         }
     }
 

@@ -9,7 +9,7 @@ namespace EncompassSettings.EncompassSettingsManager
 {
     public static class Forms
     {
-        public static string GetAllFormGroups(this EncompassSessionManager manager)
+        public static List<iFormTemplate> GetAllFormGroups(this EncompassSessionManager manager)
         {
             TemplateIFSExplorer explorer =
                 new TemplateIFSExplorer(manager.EncompassDefaultInstance, TemplateSettingsType.FormList);
@@ -28,11 +28,11 @@ namespace EncompassSettings.EncompassSettingsManager
                 });
             }
 
-            return JsonConvert.SerializeObject(rules);
+            return rules;
         }
     }
     
-    class iFormTemplate
+    public class iFormTemplate
     {
         public string name { get; set; }
         public string description { get; set; }
