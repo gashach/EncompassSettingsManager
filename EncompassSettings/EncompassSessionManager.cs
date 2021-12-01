@@ -12,7 +12,7 @@ using EllieMae.Encompass.BusinessObjects.Loans;
 
 namespace EncompassSettings
 {
-    public class EncompassSessionManager
+    public class EncompassSessionManager :IDisposable
     {
         public EllieMae.Encompass.Client.Session EncompassSession { get; private set; }
         public EllieMae.EMLite.RemotingServices.Sessions.Session EncompassDefaultInstance { get; private set; }
@@ -35,6 +35,12 @@ namespace EncompassSettings
                 .Single(pi => pi.Name == "SessionObjects")
                 .GetValue(EncompassSession) as SessionObjects;
         }
-        
+
+
+        public void Dispose()
+        {
+            EncompassSession.End();
+            ((IDisposable) EncompassSession)?.Dispose();
+        }
     }
 }

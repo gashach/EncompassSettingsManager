@@ -48,8 +48,7 @@ namespace EncompassSettings.Converters
 
         public override void WriteJson(JsonWriter writer, BizRuleInfo value, JsonSerializer serializer)
         {
-            JsonSerializer ks = new JsonSerializer();
-            ks.Serialize(writer, value);
+            serializer.Serialize(writer, value);
         }
     }
 }

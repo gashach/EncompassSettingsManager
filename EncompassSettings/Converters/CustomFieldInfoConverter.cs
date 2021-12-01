@@ -28,7 +28,7 @@ namespace EncompassSettings.Converters
 
         public override void WriteJson(JsonWriter writer, CustomFieldInfo value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            serializer.Serialize(writer, value);
         }
     }
 }
