@@ -21,11 +21,14 @@ namespace EncompassSettings
         
         
         
-        public EncompassSessionManager(string server, string userName, string password)
+        public EncompassSessionManager(string serverID, string userName, string password)
         {
+            var server = $"https://{serverID}.ea.elliemae.net${serverID}";
             EncompassSession = new EllieMae.Encompass.Client.Session();
             EncompassSession.Start(server, userName, password);
-            EllieMae.EMLite.RemotingServices.Session.Start(server, userName, password, "AdminTools", false);
+            EllieMaeIdpClient emc = new EllieMaeIdpClient();
+            var authCode = emc.GetAuthCode(serverID, userName, password).GetAwaiter().GetResult();
+            EllieMae.EMLite.RemotingServices.Session.Start(server, userName, password, "AdminTools", false,null,authCode);
             EncompassDefaultInstance = EllieMae.EMLite.RemotingServices.Session.DefaultInstance;
             //var res  = EllieMae.EMLite.RemotingServices.SystemSettings.AllFolders;
             EncompassSessionObjects = EncompassSession.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
