@@ -22,7 +22,7 @@ namespace EncompassSettings
         public static void RUN()
         {
             Converters.ConverterRegistry.Register();
-            EncompassSessionManager manager = new EncompassSessionManager("ServerURL", "UserName", "Password");
+            EncompassSessionManager manager = new EncompassSessionManager("ServerID", "UserName", "Password");
         }
     }
 }
